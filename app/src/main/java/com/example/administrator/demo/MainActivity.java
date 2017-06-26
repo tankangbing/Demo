@@ -63,23 +63,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 break;
             case R.id.btn_remind:
-
+                Toast.makeText(getApplicationContext(), "2",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_curve:
-
+                Toast.makeText(getApplicationContext(), "3",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_show:
-
+                Toast.makeText(getApplicationContext(), "4",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_set:
+                Toast.makeText(getApplicationContext(), "5",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_ii:
+                Toast.makeText(getApplicationContext(), "6",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_powerkm:
-
+                Toast.makeText(getApplicationContext(), "7",Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.btn_guide:
-
+                Toast.makeText(getApplicationContext(), "8",Toast.LENGTH_SHORT ).show();
                 break;
             default:
                 break;

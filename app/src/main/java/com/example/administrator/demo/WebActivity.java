@@ -65,6 +65,7 @@ public class WebActivity extends AppCompatActivity{
         mWebSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         mWebSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
         String s = "http://192.168.1.58:8088/smLibrary";
+        String y = "http:www.baidu.com";
         mWebView.loadUrl(s);
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
