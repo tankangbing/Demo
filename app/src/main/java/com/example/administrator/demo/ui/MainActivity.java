@@ -1,4 +1,4 @@
-package com.example.administrator.demo;
+package com.example.administrator.demo.ui;
 
 import android.content.Intent;
 import android.os.Build;
@@ -6,9 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.administrator.demo.R;
+import com.example.administrator.demo.SystemBarTintManager;
+import com.example.administrator.demo.been.CameraBeen;
+import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout btn1 ,btn2,btn3, btn4,btn5, btn6,btn7, btn8;
@@ -30,9 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     private void initData() {
-        //hehe
-    }
 
+    }
     private void initView() {
         setContentView(R.layout.activity_main);
         btn1 = (LinearLayout) findViewById(R.id.btn_mreasure);
@@ -52,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn7.setOnClickListener(this);
         btn8.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 break;
             case R.id.btn_remind:
-                Toast.makeText(getApplicationContext(), "2",Toast.LENGTH_SHORT ).show();
+               sao();
                 break;
             case R.id.btn_curve:
                 Toast.makeText(getApplicationContext(), "3",Toast.LENGTH_SHORT ).show();
@@ -86,6 +90,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    private void sao() {
+        IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+        integrator.initiateScan();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanResult != null) {
+            //扫描结果
+            String result = scanResult.getContents();
+            //解析
+            gsonforResult(result);
+            Intent intent2=new Intent(MainActivity.this,CameraaActivity.class);
+            startActivity(intent2);
+        }
+
+    }
+    private void gsonforResult(String result) {
+        Gson gson = new Gson();
+        CameraBeen cameraBeen = gson.fromJson(result, CameraBeen.class);
     }
 
     //返回键添加提醒

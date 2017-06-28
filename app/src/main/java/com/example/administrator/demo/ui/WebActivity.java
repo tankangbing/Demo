@@ -1,4 +1,4 @@
-package com.example.administrator.demo;
+package com.example.administrator.demo.ui;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import static com.example.administrator.demo.R.id.webView;
+import com.example.administrator.demo.R;
+import com.example.administrator.demo.SystemBarTintManager;
 
 public class WebActivity extends AppCompatActivity{
 
@@ -38,7 +39,7 @@ public class WebActivity extends AppCompatActivity{
 
     private void initView() {
         setContentView(R.layout.activity_web);
-        mWebView = (WebView)findViewById(webView);
+        mWebView = (WebView)findViewById(R.id.webView);
 
     }
 
