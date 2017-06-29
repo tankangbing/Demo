@@ -34,6 +34,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'org.xutils:xutils:3.3.38'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.zhy:okhttputils:2.0.0'
 
     compile 'com.journeyapps:zxing-android-embedded:2.0.1@aar'
     compile 'com.journeyapps:zxing-android-legacy:2.0.1@aar'

@@ -12,14 +12,22 @@ import android.widget.Toast;
 import com.example.administrator.demo.R;
 import com.example.administrator.demo.SystemBarTintManager;
 import com.example.administrator.demo.been.CameraBeen;
+import com.example.administrator.demo.utils.PreferencesUtils;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.xutils.http.RequestParams;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout btn1 ,btn2,btn3, btn4,btn5, btn6,btn7, btn8;
     //    LinearLayout btn1;
     private long exitTime = 0;
+    private CameraBeen mCameraBeen;
+
     //    Toast tst;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,14 +112,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String result = scanResult.getContents();
             //解析
             gsonforResult(result);
-            Intent intent2=new Intent(MainActivity.this,CameraaActivity.class);
-            startActivity(intent2);
+            //回调接口
+            /**
+             *url:api+statistics/scaned_client
+             bgId:场景背景ID
+             bgTitle:场景背景标题
+             userName:用户名
+             userPhone:用户手机
+             fromMac:大屏MAC
+             fromLibrary:大屏所在图书馆
+             */
+            String url=null;
+            String bgId=null;
+            String bgTitle=null;
+            String userName=null;
+            String userPhone=null;
+            String fromMac=null;
+            String fromLibrary=null;
+//            getBack(url,bgId,bgTitle,userName,userPhone,fromMac,fromLibrary);
+
         }
 
     }
+
+    private void getBack(String url,String bgId, String bgTitle, String userName, String userPhone, String fromMac, String fromLibrary) {
+
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("bgId", bgId)
+                .addParams("bgTitle", bgTitle)
+                .addParams("userName", userName)
+                .addParams("userPhone", userPhone)
+                .addParams("fromMac", fromMac)
+                .addParams("fromLibrary", fromLibrary)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                });
+    }
+
+
     private void gsonforResult(String result) {
         Gson gson = new Gson();
-        CameraBeen cameraBeen = gson.fromJson(result, CameraBeen.class);
+        mCameraBeen = gson.fromJson(result, CameraBeen.class);
+        PreferencesUtils.putString(getApplicationContext(),"url",mCameraBeen.getUrl());
+//        String api = cameraBeen.getApi();
+//        String url = cameraBeen.getUrl();
+//        String library = cameraBeen.getLibrary();
+        Intent intent2=new Intent(MainActivity.this,CameraaActivity.class);
+        Bundle bundle=new Bundle();
+        //传递name参数为tinyphp
+        bundle.putString("URL",mCameraBeen.getUrl());
+        intent2.putExtras(bundle);
+        startActivity(intent2);
     }
 
     //返回键添加提醒
