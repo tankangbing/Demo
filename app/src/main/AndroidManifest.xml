@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".ui.OverlayActivity">
         </activity>
+        <activity android:name=".ui.TouchImageViewActivity">
+        </activity>
     </application>
 
 </manifest>

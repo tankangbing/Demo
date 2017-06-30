@@ -79,7 +79,7 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
         //接收name值
         String url = bundle.getString("URL");
         x.Ext.init(getApplication());
-        CameraBeen cameraBeen = new CameraBeen();
+//        CameraBeen cameraBeen = new CameraBeen();
 //        x.image().bind(mIvresult, "http://192.168.1.99/AugmentedRealitySystemFile/scenePhoto/1920/3f261939-5140-40ca-8d16-b9aa4d30b451_ar_haixinsha.jpg");
         x.image().bind(mIvresult,url);
     }

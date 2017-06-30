@@ -75,13 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 break;
             case R.id.btn_remind:
+//             扫描二维码
                sao();
                 break;
             case R.id.btn_curve:
-                Toast.makeText(getApplicationContext(), "3",Toast.LENGTH_SHORT ).show();
+                text();
                 break;
             case R.id.btn_show:
-                Toast.makeText(getApplicationContext(), "4",Toast.LENGTH_SHORT ).show();
+                text1();
                 break;
             case R.id.btn_set:
                 Toast.makeText(getApplicationContext(), "5",Toast.LENGTH_SHORT ).show();
@@ -100,10 +101,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void text1() {
+        Intent intent1=new Intent(MainActivity.this,TouchImageViewActivity.class);
+        startActivity(intent1);
+    }
+
+    private void text() {
+        Intent intent1=new Intent(MainActivity.this,OverlayActivity.class);
+        startActivity(intent1);
+    }
+
     private void sao() {
         IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
         integrator.initiateScan();
     }
+    //扫描完返回的字符串
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

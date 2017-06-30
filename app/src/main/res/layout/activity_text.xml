@@ -29,28 +29,28 @@
         <!--android:gravity="center"-->
         <!--/>-->
     <com.example.administrator.demo.view.TouchImageView
-        android:id="@+id/iv_overlay_item"
+        android:id="@+id/iv_overlay_itemt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
     </com.example.administrator.demo.view.TouchImageView>
-    <Button
-        android:id="@+id/btn_overlay_pre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:gravity="center"
-        android:text="上一步"
-        android:padding="20dp"/>
-    <Button
-        android:id="@+id/btn_overlay_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:text="保存"
-        android:padding="20dp"/>
+    <!--<Button-->
+        <!--android:id="@+id/btn_overlay_pre"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:gravity="center"-->
+        <!--android:text="上一步"-->
+        <!--android:padding="20dp"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/btn_overlay_save"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:gravity="center"-->
+        <!--android:text="保存"-->
+        <!--android:padding="20dp"/>-->
 
 </RelativeLayout >
