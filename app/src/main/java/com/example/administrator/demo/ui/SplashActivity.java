@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.example.administrator.demo.R;
+import com.example.administrator.demo.utils.PreferencesUtils;
 
 /**
  * Created by U on 2017/1/13.
@@ -55,16 +56,19 @@ public class SplashActivity extends Activity {
             public void onAnimationStart(Animation animation) {
 
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
                     // 动画做完
                 Intent intent=null;
-
-                    // 跳转到主页面
+                boolean yes = PreferencesUtils.getBoolean(getApplicationContext(), "yes");
+                // 跳转到主页面
+                if(yes){
                     intent=new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(intent);
-
+                }else {
+                    intent=new Intent(SplashActivity.this,UserActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
 

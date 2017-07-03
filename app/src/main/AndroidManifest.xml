@@ -30,6 +30,10 @@
         </activity>
         <activity android:name=".ui.TouchImageViewActivity">
         </activity>
+        <activity android:name=".ui.UserActivity">
+        </activity>
+        <activity android:name=".ui.PreviewActivity">
+        </activity>
     </application>
 
 </manifest>

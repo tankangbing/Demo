@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import org.xutils.http.RequestParams;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout btn1 ,btn2,btn3, btn4,btn5, btn6,btn7, btn8;
+    ImageView reSet;
     //    LinearLayout btn1;
     private long exitTime = 0;
     private CameraBeen mCameraBeen;
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn6 = (LinearLayout) findViewById(R.id.btn_ii);
         btn7 = (LinearLayout) findViewById(R.id.btn_powerkm);
         btn8 = (LinearLayout) findViewById(R.id.btn_guide);
+        reSet = (ImageView) findViewById(R.id.iv_reset);
+
+        reSet.setOnClickListener(this);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -95,6 +100,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_guide:
                 Toast.makeText(getApplicationContext(), "8",Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.iv_reset:
+                Intent intent=new Intent(MainActivity.this,UserActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             default:
                 break;

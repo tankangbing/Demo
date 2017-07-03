@@ -1,5 +1,6 @@
 package com.example.administrator.demo.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -38,9 +40,8 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
     private Button mBtnOverlay_pre;
     private ImageView mIv_overlay_result;
     private TouchImageView mIv_overlay_item;
-    private Bitmap mBitmap,Overlay_item;
+    private Bitmap Overlay_item;
     private Canvas canvas;
-    private int lastX, lastY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,6 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
 //        mIv_overlay_item.setBitmab(BitmapFactory.decodeResource(getResources(), R.drawable.logo));
 //        mIv_overlay_item.setBitmab(BitmapFactory.decodeResource(getResources(), R.drawable.bg));
         mIv_overlay_item.setDrawingCacheEnabled(true);
-//        mIv_overlay_item.setOnTouchListener(this);//点击
         Intent intent = getIntent();
         if (intent != null) {
             Overlay_item = intent.getParcelableExtra("bitmap");
@@ -94,14 +94,39 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_overlay_pre:
+                //返回预览照片
+                Intent intent = new Intent(OverlayActivity.this,PreviewActivity.class);
+                intent.putExtra("bitmap", Overlay_item);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_overlay_save:
                 //保存叠加后的照片
                 save();
+                //弹出对话框
+                dialog();
                 break;
             default:
                 break;
         }
+    }
+
+    private void dialog() {
+
+//        new AlertDialog.Builder(OverlayActivity.this).setTitle("注意")//设置对话框标题
+//                .setMessage("清除数据会清除您本地的数据及个人信息，您确定要清除数据吗！")//设置显示的内容
+//                .setPositiveButton("确定",new DialogInterface.OnClickListener() {//添加确定按钮
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+//                        // TODO Auto-generated method stub
+//                    }
+//                })
+//                .setNegativeButton("取消",new DialogInterface.OnClickListener() {//添加返回按钮
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {//响应事件
+//                        // TODO Auto-generated method stub
+//                    }
+//                }).show();//在按键响应事件中显示此对话框
     }
 
     private void save() {
@@ -119,11 +144,8 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
         SimpleDateFormat formatter = new SimpleDateFormat   ("yyyy年MM月dd日   HH:mm:ss");
         Date curDate =  new Date(System.currentTimeMillis());
         String   str   =   formatter.format(curDate);
-//        File f = new File(getCacheDir().getAbsolutePath() + "/"
-//                + str + "/img.jpg");
         File file = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis()+".jpg");
         try {
-//            saveMyBitmap(f, bitmap);
             FileOutputStream out = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();

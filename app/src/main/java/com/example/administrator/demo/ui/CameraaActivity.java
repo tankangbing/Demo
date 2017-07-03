@@ -79,7 +79,7 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
         //接收name值
         String url = bundle.getString("URL");
         x.Ext.init(getApplication());
-//        CameraBeen cameraBeen = new CameraBeen();
+        //测试
 //        x.image().bind(mIvresult, "http://192.168.1.99/AugmentedRealitySystemFile/scenePhoto/1920/3f261939-5140-40ca-8d16-b9aa4d30b451_ar_haixinsha.jpg");
         x.image().bind(mIvresult,url);
     }
@@ -88,20 +88,14 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_next:
-//                Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                Uri uri = Uri.fromFile(new File(picPath));        //为拍摄的图片指定一个存储的路径
-//                intent2.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//                intent2.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);//保存照片的质量
-//                startActivityForResult(intent2, REQUEST_ORIGINAL);
-                //合成
-                Intent intent = new Intent(CameraaActivity.this,OverlayActivity.class);
-                intent.putExtra("bitmap", mBitmap);
-                startActivity(intent);
+                //调用手机拍照
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_THUMBNAIL);
                 break;
             case R.id.btn_pre:
-                //压缩图片，防止oom
-                Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent1, REQUEST_THUMBNAIL);
+                //返回扫描界面
+                Intent intent1 = new Intent(CameraaActivity.this,MainActivity.class);
+                startActivity(intent1);
                 break;
             default:
                 break;
@@ -132,11 +126,13 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
                         e.printStackTrace();
                     }
                 }
-            }else  if(requestCode == REQUEST_THUMBNAIL){
-
+            }else
+            if(requestCode == REQUEST_THUMBNAIL){
                 Bundle bundle = data.getExtras();
                 mBitmap = (Bitmap) bundle.get("data");
-                mIvresult.setImageBitmap(mBitmap);
+                Intent intent = new Intent(CameraaActivity.this,PreviewActivity.class);
+                intent.putExtra("bitmap", mBitmap);
+                startActivity(intent);
             }
         }
     }

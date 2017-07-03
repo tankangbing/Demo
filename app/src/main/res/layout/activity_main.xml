@@ -12,10 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary">
-        <TextView
-            style="@style/Titletext"
-            android:text="广州图书馆"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/Titletext"
+                android:text="广州图书馆"
+                />
             />
+            <ImageButton
+                android:id="@+id/iv_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="17dp"
+                android:background="#617b8e"
+                android:clickable="true"
+                android:src="@drawable/next"/>
+        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
 

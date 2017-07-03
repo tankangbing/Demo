@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:gravity="center"
-        android:text="保存"
+        android:text="保存照片"
         android:padding="20dp"/>
 
 </RelativeLayout >
