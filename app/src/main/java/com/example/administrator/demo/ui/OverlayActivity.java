@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.administrator.demo.R;
 import com.example.administrator.demo.SystemBarTintManager;
@@ -36,8 +37,8 @@ import java.util.Date;
 public class OverlayActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private Button mBtn_overlay_save;
-    private Button mBtnOverlay_pre;
+    private TextView mBtn_overlay_save;
+    private TextView mBtnOverlay_pre;
     private ImageView mIv_overlay_result;
     private TouchImageView mIv_overlay_item;
     private Bitmap Overlay_item;
@@ -62,8 +63,8 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView() {
         setContentView(R.layout.activity_overlay);
-        mBtn_overlay_save = (Button) findViewById(R.id.btn_overlay_save);
-        mBtnOverlay_pre = (Button) findViewById(R.id.btn_overlay_pre);
+        mBtn_overlay_save = (TextView) findViewById(R.id.btn_overlay_save);
+        mBtnOverlay_pre = (TextView) findViewById(R.id.btn_overlay_pre);
         mIv_overlay_result = (ImageView) findViewById(R.id.iv_overlay_result);//扫描的图片
         mIv_overlay_item = (TouchImageView) findViewById(R.id.iv_overlay_item);//拍照的图片
 
@@ -74,8 +75,6 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
     private void initData() {
         mIv_overlay_result.setDrawingCacheEnabled(true);// 启用缓存
         mIv_overlay_item.setImageResource(R.drawable.logo);
-//        mIv_overlay_item.setBitmab(BitmapFactory.decodeResource(getResources(), R.drawable.logo));
-//        mIv_overlay_item.setBitmab(BitmapFactory.decodeResource(getResources(), R.drawable.bg));
         mIv_overlay_item.setDrawingCacheEnabled(true);
         Intent intent = getIntent();
         if (intent != null) {
@@ -112,21 +111,6 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void dialog() {
-
-//        new AlertDialog.Builder(OverlayActivity.this).setTitle("注意")//设置对话框标题
-//                .setMessage("清除数据会清除您本地的数据及个人信息，您确定要清除数据吗！")//设置显示的内容
-//                .setPositiveButton("确定",new DialogInterface.OnClickListener() {//添加确定按钮
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-//                        // TODO Auto-generated method stub
-//                    }
-//                })
-//                .setNegativeButton("取消",new DialogInterface.OnClickListener() {//添加返回按钮
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {//响应事件
-//                        // TODO Auto-generated method stub
-//                    }
-//                }).show();//在按键响应事件中显示此对话框
     }
 
     private void save() {
@@ -156,30 +140,6 @@ public class OverlayActivity extends AppCompatActivity implements View.OnClickLi
         //======================================================
         mIv_overlay_item.setVisibility(View.GONE);
     }
-
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                lastX = (int) event.getRawX();
-//                lastY = (int) event.getRawY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                int dx = (int) event.getRawX() - lastX;
-//                int dy = (int) event.getRawY() - lastY;
-//                int left = v.getLeft() + dx;
-//                int top = v.getTop() + dy;
-//                int right = v.getRight() + dx;
-//                int bottom = v.getBottom() + dy;
-//                v.layout(left, top, right, bottom);
-//                lastX = (int) event.getRawX();
-//                lastY = (int) event.getRawY();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                break;
-//        }
-//        return true;
-//    }
 
 }
 

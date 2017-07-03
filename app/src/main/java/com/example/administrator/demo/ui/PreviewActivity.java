@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.administrator.demo.R;
 import com.example.administrator.demo.SystemBarTintManager;
@@ -24,9 +25,9 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
     private static int REQUEST_ORIGINAL = 2;// 请求原图信号标识
     private static int REQUEST_THUMBNAIL = 1;// 请求缩略图信号标识
     private Bitmap mBitmap;
-    private Button mBtn_p_next;
-    private Button mBtn_p_again;
-    private Button mBtn_p_pre;
+    private TextView mBtn_p_next;
+    private TextView mBtn_p_again;
+    private TextView mBtn_p_pre;
     private ImageView mIvpreview;
 
     @Override
@@ -48,9 +49,9 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView() {
         setContentView(R.layout.activity_preview);
-        mBtn_p_next = (Button) findViewById(R.id.btn_preview_next);
-        mBtn_p_again = (Button) findViewById(R.id.btn_preview_again);
-        mBtn_p_pre = (Button) findViewById(R.id.btn_preview_pre);
+        mBtn_p_next = (TextView) findViewById(R.id.btn_preview_next);
+        mBtn_p_again = (TextView) findViewById(R.id.btn_preview_again);
+        mBtn_p_pre = (TextView) findViewById(R.id.btn_preview_pre);
         mIvpreview = (ImageView) findViewById(R.id.iv_result_preview);
 
         mBtn_p_next.setOnClickListener(this);

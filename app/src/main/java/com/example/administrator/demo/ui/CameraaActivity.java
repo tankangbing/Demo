@@ -3,6 +3,7 @@ package com.example.administrator.demo.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.demo.R;
@@ -35,8 +37,8 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private ImageView mIvresult;
-    private Button mBtnNext;
-    private Button mBtnPre;
+    private TextView mBtnNext;
+    private TextView mBtnPre;
     private String sdPath;//SD卡的路径
      private String picPath;//图片存储路径
     private static int REQUEST_ORIGINAL = 2;// 请求原图信号标识
@@ -63,9 +65,8 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
     private void initView() {
         setContentView(R.layout.activity_cameraa);
         mIvresult = (ImageView) findViewById(R.id.iv_result);
-        mBtnNext = (Button) findViewById(R.id.btn_next);
-        mBtnPre = (Button) findViewById(R.id.btn_pre);
-
+        mBtnNext = (TextView) findViewById(R.id.btn_next);
+        mBtnPre = (TextView) findViewById(R.id.btn_pre);
         mBtnPre.setOnClickListener(this);
         mBtnNext.setOnClickListener(this);
     }
@@ -75,13 +76,13 @@ public class CameraaActivity extends AppCompatActivity implements View.OnClickLi
         sdPath = Environment.getExternalStorageDirectory().getPath();
         picPath = sdPath + "/" + "temp.png";
         //新页面接收数据
-        Bundle bundle = this.getIntent().getExtras();
-        //接收name值
-        String url = bundle.getString("URL");
+//        Bundle bundle = this.getIntent().getExtras();
+//        //接收name值
+//        String url = bundle.getString("URL");
         x.Ext.init(getApplication());
         //测试
-//        x.image().bind(mIvresult, "http://192.168.1.99/AugmentedRealitySystemFile/scenePhoto/1920/3f261939-5140-40ca-8d16-b9aa4d30b451_ar_haixinsha.jpg");
-        x.image().bind(mIvresult,url);
+        x.image().bind(mIvresult, "http://192.168.1.99/AugmentedRealitySystemFile/scenePhoto/1920/3f261939-5140-40ca-8d16-b9aa4d30b451_ar_haixinsha.jpg");
+//        x.image().bind(mIvresult,url);
     }
 
     @Override

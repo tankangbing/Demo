@@ -15,42 +15,40 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary">
-        <TextView
-            style="@style/Titletext"
-            android:text="合成"
-            />
+        android:layout_height="wrap_content">
     </android.support.v7.widget.Toolbar>
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_overlay_item"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--/>-->
     <com.example.administrator.demo.view.TouchImageView
         android:id="@+id/iv_overlay_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
     </com.example.administrator.demo.view.TouchImageView>
-    <Button
-        android:id="@+id/btn_overlay_pre"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:gravity="center"
-        android:text="上一步"
-        android:padding="20dp"/>
-    <Button
-        android:id="@+id/btn_overlay_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:text="保存照片"
-        android:padding="20dp"/>
+        android:background="#25000000">
+        <TextView
+            android:id="@+id/btn_overlay_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="17dp"
+            android:text="上一步"
+            android:padding="10dp"/>
+        <TextView
+            android:id="@+id/btn_overlay_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="17dp"
+            android:text="保存照片"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout >

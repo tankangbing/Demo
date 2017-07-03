@@ -1,15 +1,22 @@
 package com.example.administrator.demo.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acker.simplezxing.activity.CaptureActivity;
 import com.example.administrator.demo.R;
 import com.example.administrator.demo.SystemBarTintManager;
 import com.example.administrator.demo.been.CameraBeen;
@@ -21,14 +28,13 @@ import com.squareup.okhttp.Request;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.xutils.http.RequestParams;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout btn1 ,btn2,btn3, btn4,btn5, btn6,btn7, btn8;
     ImageView reSet;
-    //    LinearLayout btn1;
+    private static final int REQ_CODE_PERMISSION = 0x1111;
     private long exitTime = 0;
     private CameraBeen mCameraBeen;
+    private TextView mSet;
 
     //    Toast tst;
     @Override
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 text1();
                 break;
             case R.id.btn_set:
-                Toast.makeText(getApplicationContext(), "5",Toast.LENGTH_SHORT ).show();
+               text5();
                 break;
             case R.id.btn_ii:
                 Toast.makeText(getApplicationContext(), "6",Toast.LENGTH_SHORT ).show();
@@ -111,13 +117,87 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    //================================扫描的测试==============================================================
+
+    private void text5() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // Do not have the permission of camera, request it.
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, REQ_CODE_PERMISSION);
+        } else {
+            // Have gotten the permission
+            startCaptureActivityForResult();
+        }
+    }
+    private void startCaptureActivityForResult() {
+        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(CaptureActivity.KEY_NEED_BEEP, CaptureActivity.VALUE_BEEP);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_VIBRATION, CaptureActivity.VALUE_VIBRATION);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_EXPOSURE, CaptureActivity.VALUE_NO_EXPOSURE);
+        bundle.putByte(CaptureActivity.KEY_FLASHLIGHT_MODE, CaptureActivity.VALUE_FLASHLIGHT_OFF);
+        bundle.putByte(CaptureActivity.KEY_ORIENTATION_MODE, CaptureActivity.VALUE_ORIENTATION_AUTO);
+        bundle.putBoolean(CaptureActivity.KEY_SCAN_AREA_FULL_SCREEN, CaptureActivity.VALUE_SCAN_AREA_FULL_SCREEN);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_SCAN_HINT_TEXT, CaptureActivity.VALUE_SCAN_HINT_TEXT);
+        intent.putExtra(CaptureActivity.EXTRA_SETTING_BUNDLE, bundle);
+        startActivityForResult(intent, CaptureActivity.REQ_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQ_CODE_PERMISSION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // User agree the permission
+                    startCaptureActivityForResult();
+                } else {
+                    // User disagree the permission
+                    Toast.makeText(this, "You must agree the camera permission request before you use the code scan function", Toast.LENGTH_LONG).show();
+                }
+            }
+            break;
+        }
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//            case CaptureActivity.REQ_CODE:
+//                switch (resultCode) {
+//                    case RESULT_OK:
+////                        mSet.setText(data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT));  //or do sth
+//                        String result = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
+//                        //扫描结果
+//                        //解析
+//                         gsonforResult(result);
+//                        break;
+//                    case RESULT_CANCELED:
+//                        if (data != null) {
+//                            // for some reason camera is not working correctly
+////                            mSet.setText(data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT));
+//                            String resultt = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
+//                            //扫描结果
+//                            //解析
+//                            gsonforResult(resultt);
+//                        }
+//                        break;
+//                }
+//                break;
+//        }
+//    }
+
+    //================================扫描的测试==============================================================
+
+
     private void text1() {
         Intent intent1=new Intent(MainActivity.this,TouchImageViewActivity.class);
         startActivity(intent1);
     }
 
     private void text() {
-        Intent intent1=new Intent(MainActivity.this,OverlayActivity.class);
+        Intent intent1=new Intent(MainActivity.this,CameraaActivity.class);
         startActivity(intent1);
     }
 
