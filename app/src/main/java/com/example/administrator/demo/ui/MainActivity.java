@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_remind:
 //             扫描二维码
-               sao();
+                scan();
                 break;
             case R.id.btn_curve:
                 text();
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 text1();
                 break;
             case R.id.btn_set:
-               text5();
                 break;
             case R.id.btn_ii:
                 Toast.makeText(getApplicationContext(), "6",Toast.LENGTH_SHORT ).show();
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //================================扫描的测试==============================================================
 
-    private void text5() {
+    private void scan() {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             // Do not have the permission of camera, request it.
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, REQ_CODE_PERMISSION);
@@ -160,33 +159,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        switch (requestCode) {
-//            case CaptureActivity.REQ_CODE:
-//                switch (resultCode) {
-//                    case RESULT_OK:
-////                        mSet.setText(data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT));  //or do sth
-//                        String result = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
-//                        //扫描结果
-//                        //解析
-//                         gsonforResult(result);
-//                        break;
-//                    case RESULT_CANCELED:
-//                        if (data != null) {
-//                            // for some reason camera is not working correctly
-////                            mSet.setText(data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT));
-//                            String resultt = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
-//                            //扫描结果
-//                            //解析
-//                            gsonforResult(resultt);
-//                        }
-//                        break;
-//                }
-//                break;
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CaptureActivity.REQ_CODE:
+                switch (resultCode) {
+                    case RESULT_OK:
+                        String result = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
+                        //扫描结果
+                        //解析
+                         gsonforResult(result);
+                        break;
+                    case RESULT_CANCELED:
+                        if (data != null) {
+                            String resultt = data.getStringExtra(CaptureActivity.EXTRA_SCAN_RESULT);
+                            //扫描结果
+                            //解析
+                            gsonforResult(resultt);
+                        }
+                        break;
+                }
+                break;
+        }
+    }
 
     //================================扫描的测试==============================================================
 
@@ -201,41 +197,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent1);
     }
 
-    private void sao() {
-        IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-        integrator.initiateScan();
-    }
+//    private void sao() {
+//        IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+//        integrator.initiateScan();
+//    }
     //扫描完返回的字符串
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (scanResult != null) {
-            //扫描结果
-            String result = scanResult.getContents();
-            //解析
-            gsonforResult(result);
-            //回调接口
-            /**
-             *url:api+statistics/scaned_client
-             bgId:场景背景ID
-             bgTitle:场景背景标题
-             userName:用户名
-             userPhone:用户手机
-             fromMac:大屏MAC
-             fromLibrary:大屏所在图书馆
-             */
-            String url=null;
-            String bgId=null;
-            String bgTitle=null;
-            String userName=null;
-            String userPhone=null;
-            String fromMac=null;
-            String fromLibrary=null;
-//            getBack(url,bgId,bgTitle,userName,userPhone,fromMac,fromLibrary);
-
-        }
-
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+//        if (scanResult != null) {
+//            //扫描结果
+//            String result = scanResult.getContents();
+//            //解析
+//            gsonforResult(result);
+//            //回调接口
+//            /**
+//             *url:api+statistics/scaned_client
+//             bgId:场景背景ID
+//             bgTitle:场景背景标题
+//             userName:用户名
+//             userPhone:用户手机
+//             fromMac:大屏MAC
+//             fromLibrary:大屏所在图书馆
+//             */
+//            String url=null;
+//            String bgId=null;
+//            String bgTitle=null;
+//            String userName=null;
+//            String userPhone=null;
+//            String fromMac=null;
+//            String fromLibrary=null;
+////            getBack(url,bgId,bgTitle,userName,userPhone,fromMac,fromLibrary);
+//
+//        }
+//
+//    }
 
     private void getBack(String url,String bgId, String bgTitle, String userName, String userPhone, String fromMac, String fromLibrary) {
 
